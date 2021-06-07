@@ -7,6 +7,8 @@ require 'rack/contrib'
 
 class TodoApp < Sinatra::Base
   use Rack::MethodOverride
+  set :database_file, "config/database.yml"
+
   get '/' do
     redirect to '/posts'
   end
@@ -34,7 +36,7 @@ class TodoApp < Sinatra::Base
   end
 
   patch '/posts/:id' do
-
+    params.delete 'submit'
     todo = Post.get(params[:id])
     todo.title = (params[:title])
     todo.body = (params[:body])

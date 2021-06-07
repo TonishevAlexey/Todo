@@ -33,13 +33,12 @@ RSpec.describe TodoApp do
     expect(last_response).to be_ok
     get 'posts/new'
     expect(last_response).to be_ok
-
-    get "/posts/#{todo.id}/edit"
-
+    get "/posts/#{todo.id}"
     expect(last_response).to be_ok
-    get "/posts/#{todo.id}/delete"
+    patch "/posts/#{todo.id}"
     expect(last_response.status).to eq(302)
-
+    delete "/posts/#{todo.id}"
+    expect(last_response.status).to eq(302)
   end
 
 end
