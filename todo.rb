@@ -19,7 +19,7 @@ class TodoApp < Sinatra::Base
   get '/posts/new' do
     erb :'posts/new'
   end
-  post '/posts/new' do
+  post '/posts' do
     params.delete 'submit'
     @todo = Post.create(params)
     if @todo.save
@@ -28,12 +28,13 @@ class TodoApp < Sinatra::Base
       'Post was not save'
     end
   end
-  get '/posts/:id/edit' do
+  get '/posts/:id' do
     @todo = Post.get(params[:id])
     erb :'posts/edit'
   end
 
-  patch '/posts/:id/edit' do
+  patch '/posts/:id' do
+
     todo = Post.get(params[:id])
     todo.title = (params[:title])
     todo.body = (params[:body])
@@ -41,7 +42,9 @@ class TodoApp < Sinatra::Base
     redirect '/posts'
   end
 
-  get '/posts/:id/delete' do
+  delete '/posts/:id' do
+    params.delete 'submit'
+
     Post.get(params[:id]).destroy
     redirect '/posts'
   end
