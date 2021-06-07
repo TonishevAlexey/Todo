@@ -1,0 +1,7 @@
+<strong><a href="/posts/new">Создать новую страницу</a></strong>
+<h2>Список всех страниц</h2>
+<% @todos.each do |post| %>
+  <strong><a href="/posts/<%= post.id %>/edit"><%= post.title %></a></strong>
+  <%= post.body %><br>
+  <hr>
+<% end %>
